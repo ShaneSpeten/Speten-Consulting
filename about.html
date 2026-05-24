@@ -86,8 +86,14 @@ description: "About Shane Speten and the philosophy behind Speten Consulting Gro
             <button class="rec-nav rec-nav--prev" type="button" aria-label="Previous recommendation" data-rec-prev>&#8249;</button>
             <div class="rec-track" data-rec-track>
                 {% for rec in recs limit: 8 %}
-                <article class="rec-card">
-                    <blockquote class="rec-text">{{ rec.Text }}</blockquote>
+                <article class="rec-card" role="button" tabindex="0"
+                    data-full-text="{{ rec.Text | escape }}"
+                    data-name="{{ rec['First Name'] }} {{ rec['Last Name'] }}"
+                    data-role="{{ rec['Job Title'] }}{% if rec.Company and rec.Company != "" %} · {{ rec.Company }}{% endif %}">
+                    <div>
+                        <blockquote class="rec-text">{{ rec.Text }}</blockquote>
+                        <p class="rec-read-more">Read more &rarr;</p>
+                    </div>
                     <div class="rec-meta">
                         <div class="rec-name">{{ rec['First Name'] }} {{ rec['Last Name'] }}</div>
                         <div class="rec-role">{{ rec['Job Title'] }}{% if rec.Company and rec.Company != "" %} &middot; {{ rec.Company }}{% endif %}</div>
@@ -104,6 +110,17 @@ description: "About Shane Speten and the philosophy behind Speten Consulting Gro
     </div>
 </section>
 
+<div class="rec-modal-backdrop" id="recModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="recModalName">
+    <div class="rec-modal">
+        <button class="rec-modal-close" id="recModalClose" aria-label="Close">&times;</button>
+        <blockquote class="rec-text" id="recModalText"></blockquote>
+        <div class="rec-meta">
+            <div class="rec-name" id="recModalName"></div>
+            <div class="rec-role" id="recModalRole"></div>
+        </div>
+    </div>
+</div>
+
 <script>
 (function () {
     var carousel = document.querySelector('[data-rec-carousel]');
@@ -111,6 +128,7 @@ description: "About Shane Speten and the philosophy behind Speten Consulting Gro
     var track = carousel.querySelector('[data-rec-track]');
     var prev = carousel.querySelector('[data-rec-prev]');
     var next = carousel.querySelector('[data-rec-next]');
+
     function step() {
         var card = track.querySelector('.rec-card');
         if (!card) return 0;
@@ -120,6 +138,38 @@ description: "About Shane Speten and the philosophy behind Speten Consulting Gro
     }
     prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
     next.addEventListener('click', function () { track.scrollBy({ left:  step(), behavior: 'smooth' }); });
+
+    // Modal
+    var backdrop = document.getElementById('recModalBackdrop');
+    var modalText = document.getElementById('recModalText');
+    var modalName = document.getElementById('recModalName');
+    var modalRole = document.getElementById('recModalRole');
+    var closeBtn  = document.getElementById('recModalClose');
+
+    function openModal(card) {
+        modalText.textContent = card.dataset.fullText;
+        modalName.textContent = card.dataset.name;
+        modalRole.textContent = card.dataset.role;
+        backdrop.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+    }
+
+    function closeModal() {
+        backdrop.classList.remove('is-open');
+        document.body.style.overflow = '';
+    }
+
+    track.querySelectorAll('.rec-card').forEach(function (card) {
+        card.addEventListener('click', function () { openModal(card); });
+        card.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card); }
+        });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', function (e) { if (e.target === backdrop) closeModal(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
 })();
 </script>
 {% endif %}

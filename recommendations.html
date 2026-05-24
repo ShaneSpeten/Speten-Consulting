@@ -23,8 +23,15 @@ description: "LinkedIn recommendations for Shane Speten from colleagues, leaders
 
         <div class="rec-grid">
             {% for rec in recs %}
-            <article class="rec-card rec-card--full">
-                <blockquote class="rec-text">{{ rec.Text }}</blockquote>
+            <article class="rec-card rec-card--full" role="button" tabindex="0"
+                data-full-text="{{ rec.Text | escape }}"
+                data-name="{{ rec['First Name'] }} {{ rec['Last Name'] }}"
+                data-role="{{ rec['Job Title'] }}{% if rec.Company and rec.Company != "" %} · {{ rec.Company }}{% endif %}"
+                data-date="{{ rec['Creation Date'] }}">
+                <div>
+                    <blockquote class="rec-text">{{ rec.Text }}</blockquote>
+                    <p class="rec-read-more">Read more &rarr;</p>
+                </div>
                 <div class="rec-meta">
                     <div class="rec-name">{{ rec['First Name'] }} {{ rec['Last Name'] }}</div>
                     <div class="rec-role">{{ rec['Job Title'] }}{% if rec.Company and rec.Company != "" %} &middot; {{ rec.Company }}{% endif %}</div>
@@ -44,6 +51,56 @@ description: "LinkedIn recommendations for Shane Speten from colleagues, leaders
         </p>
     </div>
 </section>
+
+<div class="rec-modal-backdrop" id="recModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="recModalName">
+    <div class="rec-modal">
+        <button class="rec-modal-close" id="recModalClose" aria-label="Close">&times;</button>
+        <blockquote class="rec-text" id="recModalText"></blockquote>
+        <div class="rec-meta">
+            <div class="rec-name" id="recModalName"></div>
+            <div class="rec-role" id="recModalRole"></div>
+            <div class="rec-date" id="recModalDate"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    var backdrop = document.getElementById('recModalBackdrop');
+    var modalText = document.getElementById('recModalText');
+    var modalName = document.getElementById('recModalName');
+    var modalRole = document.getElementById('recModalRole');
+    var modalDate = document.getElementById('recModalDate');
+    var closeBtn  = document.getElementById('recModalClose');
+
+    function openModal(card) {
+        modalText.textContent = card.dataset.fullText;
+        modalName.textContent = card.dataset.name;
+        modalRole.textContent = card.dataset.role;
+        modalDate.textContent = card.dataset.date || '';
+        modalDate.style.display = card.dataset.date ? '' : 'none';
+        backdrop.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+    }
+
+    function closeModal() {
+        backdrop.classList.remove('is-open');
+        document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.rec-card--full').forEach(function (card) {
+        card.addEventListener('click', function () { openModal(card); });
+        card.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card); }
+        });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', function (e) { if (e.target === backdrop) closeModal(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+})();
+</script>
 
 <section class="cta-band">
     <div class="container">
