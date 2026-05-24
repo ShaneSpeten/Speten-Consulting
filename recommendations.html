@@ -1,133 +1,54 @@
 ---
 layout: default
 nav: about
-title: "About | Speten Consulting Group"
-description: "About Shane Speten and the philosophy behind Speten Consulting Group's approach to leadership, culture, and organizational excellence."
+title: "Recommendations | Speten Consulting Group"
+description: "LinkedIn recommendations for Shane Speten from colleagues, leaders, and team members across his career."
 ---
 <header class="page-header">
     <div class="container">
-        <p class="eyebrow">About</p>
-        <h1>Experience that meets you where you are</h1>
-        <p class="subtitle">Senior people leadership, applied to your business.</p>
+        <p class="eyebrow">LinkedIn Recommendations</p>
+        <h1>In their own words</h1>
+        <p class="subtitle">What colleagues, leaders, and team members have said about working with Shane.</p>
     </div>
 </header>
 
 <section>
-    <div class="container">
-        <div class="about-intro">
-            <img src="images/shane-speten.jpg" alt="Shane Speten" class="about-portrait">
-            <div class="about-intro-text">
-                <h2 class="section-title">Meet Shane Speten</h2>
-                <p>
-                    People &amp; Business Executive with 15+ years of director-level experience leading
-                    transformational growth (+$1B P&amp;L), developing high-performing leaders, and
-                    building people-first cultures across Fortune 500 organizations including Amazon,
-                    Lowe's, LG, Sears, and Pella.
-                </p>
-            </div>
-        </div>
-        <p>
-            Shane's background spans director-level leadership roles across sales, operations,
-            talent development, customer experience, and strategic initiatives within retail,
-            supply chain, consumer services, repair, and home improvement industries. He
-            specializes in aligning people strategy with business strategy to strengthen
-            leadership capability, improve engagement, drive organizational effectiveness, and
-            deliver sustainable business results.
-        </p>
-        <p>
-            Throughout his career, he has led enterprise initiatives focused on leadership
-            development, employee engagement, coaching, succession planning, recognition, and
-            culture transformation. He has led organizations of 250+ professionals while
-            partnering with executive leaders to drive scalable growth, operational excellence,
-            and values-based leadership.
-        </p>
-        <p>
-            Known as a culture builder and people champion, Shane believes exceptional business
-            performance starts with investing in people, developing strong leaders, and creating
-            environments where teams thrive.
-        </p>
-
-        <h2 class="section-title" style="margin-top: 2em;">Core Strengths</h2>
-        <ul>
-            <li>Organizational &amp; People Strategy</li>
-            <li>Leadership Development &amp; Coaching</li>
-            <li>Culture Transformation &amp; Employee Engagement</li>
-            <li>Talent Development &amp; Succession Planning</li>
-            <li>Change Leadership &amp; Organizational Effectiveness</li>
-            <li>Strategic Growth &amp; Operational Excellence</li>
-        </ul>
-
-        <h2 class="section-title" style="margin-top: 2em;">Key Leadership Accomplishments</h2>
-        <ul>
-            <li>Selected as 1 of 100 culture leaders to cascade vision, mission and values initiatives across a 15,000+ employee workforce at Sears.</li>
-            <li>Designed and launched Sears' first national coaching program across 2,000 stores and 20,000 leaders, contributing to a 10% increase in sales productivity and $900M in incremental revenue.</li>
-            <li>Co-created a national career pathing program for 12,000 consultative associates that reduced turnover by 30%.</li>
-            <li>Led digital transformation and coaching initiatives across 1,600+ stores and 12,000 retail leaders in partnership with senior executives.</li>
-            <li>Scaled a national selling advisor program across 135 stores in 32 states, driving a 12% increase in services revenue and $70M in growth.</li>
-            <li>Built leadership pipeline programs that promoted 32 supervisors into management and higher leadership roles.</li>
-        </ul>
-
-        <p style="margin-top: 2em;">
-            Connect with Shane on <a href="https://www.linkedin.com/in/shane-speten-334b4888/" target="_blank" rel="noopener">LinkedIn</a>,
-            where 45+ recommendations reflect his commitment to mentoring, building relationships,
-            and creating impact through people-centered leadership.
-        </p>
-    </div>
-</section>
-
-{% assign recs = site.data.Recommendations_Received | where: "Status", "VISIBLE" %}
-{% if recs.size > 0 %}
-<section class="recommendations">
     <div class="container container--wide">
-        <p class="eyebrow">What Colleagues Say</p>
-        <h2 class="section-title">LinkedIn Recommendations</h2>
+        {% assign recs = site.data.Recommendations_Received | where: "Status", "VISIBLE" | sort: "Creation Date" | reverse %}
 
-        <div class="rec-carousel" data-rec-carousel>
-            <button class="rec-nav rec-nav--prev" type="button" aria-label="Previous recommendation" data-rec-prev>&#8249;</button>
-            <div class="rec-track" data-rec-track>
-                {% for rec in recs limit: 8 %}
-                <article class="rec-card">
-                    <blockquote class="rec-text">{{ rec.Text }}</blockquote>
-                    <div class="rec-meta">
-                        <div class="rec-name">{{ rec['First Name'] }} {{ rec['Last Name'] }}</div>
-                        <div class="rec-role">{{ rec['Job Title'] }}{% if rec.Company and rec.Company != "" %} &middot; {{ rec.Company }}{% endif %}</div>
-                    </div>
-                </article>
-                {% endfor %}
-            </div>
-            <button class="rec-nav rec-nav--next" type="button" aria-label="Next recommendation" data-rec-next>&#8250;</button>
+        {% if recs.size > 0 %}
+        <p class="rec-count" style="text-align: center; color: var(--muted); margin-bottom: 2.5em;">
+            {{ recs.size }} recommendation{% if recs.size != 1 %}s{% endif %}
+        </p>
+
+        <div class="rec-grid">
+            {% for rec in recs %}
+            <article class="rec-card rec-card--full">
+                <blockquote class="rec-text">{{ rec.Text }}</blockquote>
+                <div class="rec-meta">
+                    <div class="rec-name">{{ rec['First Name'] }} {{ rec['Last Name'] }}</div>
+                    <div class="rec-role">{{ rec['Job Title'] }}{% if rec.Company and rec.Company != "" %} &middot; {{ rec.Company }}{% endif %}</div>
+                    {% if rec['Creation Date'] and rec['Creation Date'] != "" %}
+                    <div class="rec-date">{{ rec['Creation Date'] }}</div>
+                    {% endif %}
+                </div>
+            </article>
+            {% endfor %}
         </div>
+        {% else %}
+        <p style="text-align: center; color: var(--muted);">Recommendations will appear here once the LinkedIn export has been added.</p>
+        {% endif %}
 
-        <p style="text-align: center; margin-top: 2em;">
-            <a href="recommendations.html" class="button button--ghost">View All Recommendations</a>
+        <p style="text-align: center; margin-top: 3em;">
+            <a href="about.html" class="button button--ghost">Back to About</a>
         </p>
     </div>
 </section>
-
-<script>
-(function () {
-    var carousel = document.querySelector('[data-rec-carousel]');
-    if (!carousel) return;
-    var track = carousel.querySelector('[data-rec-track]');
-    var prev = carousel.querySelector('[data-rec-prev]');
-    var next = carousel.querySelector('[data-rec-next]');
-    function step() {
-        var card = track.querySelector('.rec-card');
-        if (!card) return 0;
-        var style = window.getComputedStyle(track);
-        var gap = parseInt(style.columnGap || style.gap || 0, 10) || 0;
-        return card.getBoundingClientRect().width + gap;
-    }
-    prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
-    next.addEventListener('click', function () { track.scrollBy({ left:  step(), behavior: 'smooth' }); });
-})();
-</script>
-{% endif %}
 
 <section class="cta-band">
     <div class="container">
-        <h2>Let's talk about what you're working on</h2>
-        <p>A short conversation is the best way to see if we're a fit.</p>
+        <h2>Ready to talk?</h2>
+        <p>Start with a no-obligation conversation about what your organization needs.</p>
         <a href="contact.html" class="button">Get in Touch</a>
     </div>
 </section>

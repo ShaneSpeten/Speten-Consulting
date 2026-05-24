@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <meta name="description" content="{{ page.description }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;500;600&display=optional">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;500;600&display=optional" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+    <div class="container container--wide">
+        <a href="index.html" class="wordmark">Speten Consulting Group</a>
+        <div class="nav-links">
+            <a href="index.html"{% if page.nav == 'home' %} class="active"{% endif %}>Home</a>
+            <a href="about.html"{% if page.nav == 'about' %} class="active"{% endif %}>About</a>
+            <a href="services.html"{% if page.nav == 'services' %} class="active"{% endif %}>Services</a>
+            <a href="contact.html"{% if page.nav == 'contact' %} class="active"{% endif %}>Contact</a>
+        </div>
+    </div>
+</nav>
+
+{{ content }}
+
+<footer>
+    <div class="container">
+        <p class="footer-line">
+            <a href="mailto:shane@spetenconsulting.com?subject=Speten Consulting Request">shane@spetenconsulting.com</a>
+            &nbsp;·&nbsp;
+            <a href="tel:+12094239354">209-423-9354</a>
+            &nbsp;·&nbsp;
+            <a href="https://www.linkedin.com/in/shane-speten-334b4888/" target="_blank" rel="noopener">LinkedIn</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

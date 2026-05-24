@@ -1,559 +1,133 @@
-:root {
-    --navy: #1a2e44;
-    --navy-dark: #122236;
-    --cream: #f7f3ec;
-    --cream-soft: #fbf8f3;
-    --gold: #b8924a;
-    --gold-soft: #d4b478;
-    --charcoal: #2b2b2b;
-    --muted: #6a6a6a;
-    --rule: #e3dccf;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 17px;
-    line-height: 1.7;
-    color: var(--charcoal);
-    background: var(--cream);
-    -webkit-font-smoothing: antialiased;
-}
-
-h1, h2, h3, h4 {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-weight: 500;
-    color: var(--navy);
-    letter-spacing: 0.005em;
-    margin: 0 0 0.5em;
-    line-height: 1.2;
-}
-
-h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); }
-h2 { font-size: clamp(1.9rem, 3.5vw, 2.5rem); }
-h3 { font-size: 1.4rem; font-weight: 600; }
-
-p { margin: 0 0 1.1em; }
-
-a {
-    color: var(--gold);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.15s ease, color 0.15s ease;
-}
-
-a:hover {
-    border-bottom-color: var(--gold);
-}
-
-/* ---------- Layout ---------- */
-
-.container {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 0 28px;
-}
-
-.container--wide {
-    max-width: 1100px;
-}
-
-section {
-    padding: 80px 0;
-}
-
-.section-title {
-    display: inline-block;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--gold);
-    margin-bottom: 1.2em;
-}
-
-.eyebrow {
-    font-family: 'Source Sans 3', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    font-size: 0.78rem;
-    color: var(--gold);
-    font-weight: 600;
-    margin-bottom: 1.2em;
-}
-
-/* ---------- Nav ---------- */
-
-.site-nav {
-    background: var(--cream-soft);
-    border-bottom: 1px solid var(--rule);
-    padding: 22px 0;
-}
-
-.site-nav .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-}
-
-.wordmark {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.45rem;
-    color: var(--navy);
-    border: none;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-}
-
-.wordmark:hover { border: none; color: var(--gold); }
-
-.nav-links {
-    display: flex;
-    gap: 32px;
-}
-
-.nav-links a {
-    color: var(--charcoal);
-    font-size: 0.95rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    border: none;
-    padding-bottom: 2px;
-    border-bottom: 1px solid transparent;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-    color: var(--navy);
-    border-bottom-color: var(--gold);
-}
-
-/* ---------- Hero ---------- */
-
-.hero {
-    background: var(--cream-soft);
-    padding: 110px 0 100px;
-    border-bottom: 1px solid var(--rule);
-}
-
-.hero .container { text-align: center; }
-
-.hero h1 {
-    margin-bottom: 0.3em;
-}
-
-.hero .tagline {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-style: italic;
-    font-size: 1.35rem;
-    color: var(--gold);
-    margin-bottom: 1.4em;
-}
-
-.hero .lede {
-    max-width: 640px;
-    margin: 0 auto 2em;
-    font-size: 1.12rem;
-    color: var(--muted);
-}
-
-/* ---------- Page header (subpages) ---------- */
-
-.page-header {
-    background: var(--cream-soft);
-    padding: 80px 0 60px;
-    border-bottom: 1px solid var(--rule);
-    text-align: center;
-}
-
-.page-header h1 {
-    margin-bottom: 0.3em;
-}
-
-.page-header .subtitle {
-    color: var(--muted);
-    font-size: 1.1rem;
-    margin: 0;
-}
-
-/* ---------- Buttons ---------- */
-
-.button {
-    display: inline-block;
-    padding: 14px 30px;
-    background: var(--navy);
-    color: var(--cream);
-    font-size: 0.92rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    border: 1px solid var(--navy);
-    transition: background 0.18s ease, color 0.18s ease;
-}
-
-.button:hover {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: white;
-}
-
-.button--ghost {
-    background: transparent;
-    color: var(--navy);
-}
-
-.button--ghost:hover {
-    background: var(--navy);
-    color: var(--cream);
-}
-
-/* ---------- Service grid (home) ---------- */
-
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 36px 32px;
-    margin-top: 2em;
-}
-
-.service-item {
-    border-top: 2px solid var(--gold);
-    padding-top: 18px;
-}
-
-.service-item h3 {
-    margin-bottom: 0.4em;
-    color: var(--navy);
-}
-
-.service-item p {
-    color: var(--muted);
-    font-size: 0.98rem;
-    margin: 0;
-}
-
-.service-item a {
-    border: none;
-    color: inherit;
-    display: block;
-}
-
-.service-item a:hover h3 { color: var(--gold); }
-
-/* ---------- Service detail (services page) ---------- */
-
-.service-detail {
-    padding: 60px 0;
-    border-bottom: 1px solid var(--rule);
-}
-
-.service-detail:last-child { border-bottom: none; }
-
-.service-detail h2 {
-    margin-bottom: 0.4em;
-}
-
-.service-detail .who {
-    font-style: italic;
-    color: var(--muted);
-    margin-bottom: 1.2em;
-}
-
-.service-detail ul {
-    padding-left: 1.2em;
-    margin: 1em 0;
-}
-
-.service-detail li {
-    margin-bottom: 0.5em;
-}
-
-/* ---------- About teaser (home) ---------- */
-
-.about-teaser {
-    background: var(--cream-soft);
-    text-align: center;
-}
-
-.about-teaser p {
-    max-width: 620px;
-    margin: 0 auto 1.5em;
-    font-size: 1.08rem;
-    color: var(--muted);
-}
-
-/* ---------- CTA band ---------- */
-
-.cta-band {
-    background: var(--navy);
-    color: var(--cream);
-    text-align: center;
-    padding: 80px 0;
-}
-
-.cta-band h2 {
-    color: var(--cream);
-    margin-bottom: 0.4em;
-}
-
-.cta-band p {
-    color: rgba(247, 243, 236, 0.78);
-    max-width: 540px;
-    margin: 0 auto 2em;
-}
-
-.cta-band .button {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: white;
-}
-
-.cta-band .button:hover {
-    background: var(--cream);
-    color: var(--navy);
-    border-color: var(--cream);
-}
-
-/* ---------- Contact ---------- */
-
-.contact-block {
-    text-align: center;
-    padding: 30px 0;
-}
-
-.contact-block .label {
-    font-family: 'Source Sans 3', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    font-size: 0.78rem;
-    color: var(--gold);
-    font-weight: 600;
-    margin-bottom: 0.4em;
-}
-
-.contact-block .value {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.6rem;
-    color: var(--navy);
-}
-
-.contact-block .value a {
-    color: var(--navy);
-    border-bottom-color: var(--rule);
-}
-
-.contact-block .value a:hover { border-bottom-color: var(--gold); color: var(--gold); }
-
-/* ---------- Footer ---------- */
-
-footer {
-    background: var(--navy-dark);
-    color: rgba(247, 243, 236, 0.75);
-    padding: 40px 0;
-    font-size: 0.92rem;
-    text-align: center;
-}
-
-footer a {
-    color: var(--gold-soft);
-    border: none;
-}
-
-footer a:hover { color: white; }
-
-footer .footer-line { margin: 0.3em 0; }
-
-/* ---------- About intro ---------- */
-
-.about-intro {
-    display: flex;
-    gap: 36px;
-    align-items: flex-start;
-    margin-bottom: 1.5em;
-}
-
-.about-portrait {
-    flex: 0 0 220px;
-    width: 220px;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 3px solid var(--gold);
-    box-shadow: 0 4px 18px rgba(26, 46, 68, 0.12);
-}
-
-.about-intro-text {
-    flex: 1;
-    min-width: 0;
-}
-
-.about-intro-text .section-title {
-    margin-top: 0;
-}
-
-@media (max-width: 640px) {
-    .about-intro {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 24px;
+---
+layout: default
+nav: about
+title: "About | Speten Consulting Group"
+description: "About Shane Speten and the philosophy behind Speten Consulting Group's approach to leadership, culture, and organizational excellence."
+---
+<header class="page-header">
+    <div class="container">
+        <p class="eyebrow">About</p>
+        <h1>Experience that meets you where you are</h1>
+        <p class="subtitle">Senior people leadership, applied to your business.</p>
+    </div>
+</header>
+
+<section>
+    <div class="container">
+        <div class="about-intro">
+            <img src="images/shane-speten.jpg" alt="Shane Speten" class="about-portrait">
+            <div class="about-intro-text">
+                <h2 class="section-title">Meet Shane Speten</h2>
+                <p>
+                    People &amp; Business Executive with 15+ years of director-level experience leading
+                    transformational growth (+$1B P&amp;L), developing high-performing leaders, and
+                    building people-first cultures across Fortune 500 organizations including Amazon,
+                    Lowe's, LG, Sears, and Pella.
+                </p>
+            </div>
+        </div>
+        <p>
+            Shane's background spans director-level leadership roles across sales, operations,
+            talent development, customer experience, and strategic initiatives within retail,
+            supply chain, consumer services, repair, and home improvement industries. He
+            specializes in aligning people strategy with business strategy to strengthen
+            leadership capability, improve engagement, drive organizational effectiveness, and
+            deliver sustainable business results.
+        </p>
+        <p>
+            Throughout his career, he has led enterprise initiatives focused on leadership
+            development, employee engagement, coaching, succession planning, recognition, and
+            culture transformation. He has led organizations of 250+ professionals while
+            partnering with executive leaders to drive scalable growth, operational excellence,
+            and values-based leadership.
+        </p>
+        <p>
+            Known as a culture builder and people champion, Shane believes exceptional business
+            performance starts with investing in people, developing strong leaders, and creating
+            environments where teams thrive.
+        </p>
+
+        <h2 class="section-title" style="margin-top: 2em;">Core Strengths</h2>
+        <ul>
+            <li>Organizational &amp; People Strategy</li>
+            <li>Leadership Development &amp; Coaching</li>
+            <li>Culture Transformation &amp; Employee Engagement</li>
+            <li>Talent Development &amp; Succession Planning</li>
+            <li>Change Leadership &amp; Organizational Effectiveness</li>
+            <li>Strategic Growth &amp; Operational Excellence</li>
+        </ul>
+
+        <h2 class="section-title" style="margin-top: 2em;">Key Leadership Accomplishments</h2>
+        <ul>
+            <li>Selected as 1 of 100 culture leaders to cascade vision, mission and values initiatives across a 15,000+ employee workforce at Sears.</li>
+            <li>Designed and launched Sears' first national coaching program across 2,000 stores and 20,000 leaders, contributing to a 10% increase in sales productivity and $900M in incremental revenue.</li>
+            <li>Co-created a national career pathing program for 12,000 consultative associates that reduced turnover by 30%.</li>
+            <li>Led digital transformation and coaching initiatives across 1,600+ stores and 12,000 retail leaders in partnership with senior executives.</li>
+            <li>Scaled a national selling advisor program across 135 stores in 32 states, driving a 12% increase in services revenue and $70M in growth.</li>
+            <li>Built leadership pipeline programs that promoted 32 supervisors into management and higher leadership roles.</li>
+        </ul>
+
+        <p style="margin-top: 2em;">
+            Connect with Shane on <a href="https://www.linkedin.com/in/shane-speten-334b4888/" target="_blank" rel="noopener">LinkedIn</a>,
+            where 45+ recommendations reflect his commitment to mentoring, building relationships,
+            and creating impact through people-centered leadership.
+        </p>
+    </div>
+</section>
+
+{% assign recs = site.data.Recommendations_Received | where: "Status", "VISIBLE" %}
+{% if recs.size > 0 %}
+<section class="recommendations">
+    <div class="container container--wide">
+        <p class="eyebrow">What Colleagues Say</p>
+        <h2 class="section-title">LinkedIn Recommendations</h2>
+
+        <div class="rec-carousel" data-rec-carousel>
+            <button class="rec-nav rec-nav--prev" type="button" aria-label="Previous recommendation" data-rec-prev>&#8249;</button>
+            <div class="rec-track" data-rec-track>
+                {% for rec in recs limit: 8 %}
+                <article class="rec-card">
+                    <blockquote class="rec-text">{{ rec.Text }}</blockquote>
+                    <div class="rec-meta">
+                        <div class="rec-name">{{ rec['First Name'] }} {{ rec['Last Name'] }}</div>
+                        <div class="rec-role">{{ rec['Job Title'] }}{% if rec.Company and rec.Company != "" %} &middot; {{ rec.Company }}{% endif %}</div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+            <button class="rec-nav rec-nav--next" type="button" aria-label="Next recommendation" data-rec-next>&#8250;</button>
+        </div>
+
+        <p style="text-align: center; margin-top: 2em;">
+            <a href="recommendations.html" class="button button--ghost">View All Recommendations</a>
+        </p>
+    </div>
+</section>
+
+<script>
+(function () {
+    var carousel = document.querySelector('[data-rec-carousel]');
+    if (!carousel) return;
+    var track = carousel.querySelector('[data-rec-track]');
+    var prev = carousel.querySelector('[data-rec-prev]');
+    var next = carousel.querySelector('[data-rec-next]');
+    function step() {
+        var card = track.querySelector('.rec-card');
+        if (!card) return 0;
+        var style = window.getComputedStyle(track);
+        var gap = parseInt(style.columnGap || style.gap || 0, 10) || 0;
+        return card.getBoundingClientRect().width + gap;
     }
-    .about-portrait {
-        flex-basis: auto;
-        width: 180px;
-        height: 180px;
-    }
-}
+    prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+    next.addEventListener('click', function () { track.scrollBy({ left:  step(), behavior: 'smooth' }); });
+})();
+</script>
+{% endif %}
 
-/* ---------- Recommendations ---------- */
-
-.recommendations {
-    background: var(--cream-soft);
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-}
-
-.rec-carousel {
-    position: relative;
-    margin-top: 2em;
-}
-
-.rec-track {
-    display: flex;
-    gap: 24px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    padding: 10px 4px 20px;
-    scrollbar-width: thin;
-}
-
-.rec-track::-webkit-scrollbar { height: 6px; }
-.rec-track::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
-
-.rec-card {
-    flex: 0 0 min(420px, 85%);
-    scroll-snap-align: start;
-    background: var(--cream);
-    border: 1px solid var(--rule);
-    border-top: 3px solid var(--gold);
-    padding: 28px 28px 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.rec-text {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-style: italic;
-    font-size: 1.12rem;
-    line-height: 1.5;
-    color: var(--charcoal);
-    margin: 0 0 1.4em;
-    quotes: "\201C" "\201D";
-}
-
-.rec-text::before {
-    content: open-quote;
-    color: var(--gold);
-    font-size: 1.4em;
-    margin-right: 2px;
-}
-
-.rec-text::after {
-    content: close-quote;
-    color: var(--gold);
-    font-size: 1.4em;
-    margin-left: 2px;
-}
-
-.rec-meta {
-    border-top: 1px solid var(--rule);
-    padding-top: 14px;
-}
-
-.rec-name {
-    font-weight: 600;
-    color: var(--navy);
-    font-size: 1rem;
-}
-
-.rec-role {
-    color: var(--muted);
-    font-size: 0.9rem;
-    margin-top: 2px;
-}
-
-.rec-date {
-    color: var(--muted);
-    font-size: 0.8rem;
-    margin-top: 6px;
-    font-style: italic;
-}
-
-.rec-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: 1px solid var(--rule);
-    background: var(--cream);
-    color: var(--navy);
-    font-size: 1.6rem;
-    line-height: 1;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-}
-
-.rec-nav:hover {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: white;
-}
-
-.rec-nav--prev { left: -8px; }
-.rec-nav--next { right: -8px; }
-
-@media (max-width: 720px) {
-    .rec-nav { display: none; }
-}
-
-/* Full list (recommendations.html) */
-
-.rec-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 24px;
-}
-
-.rec-card--full {
-    flex: none;
-    scroll-snap-align: none;
-}
-
-/* ---------- Responsive ---------- */
-
-@media (max-width: 640px) {
-    section { padding: 60px 0; }
-    .hero { padding: 70px 0 60px; }
-    .page-header { padding: 60px 0 40px; }
-    .site-nav .container {
-        flex-direction: column;
-        gap: 12px;
-    }
-    .nav-links { gap: 22px; flex-wrap: wrap; justify-content: center; }
-}
+<section class="cta-band">
+    <div class="container">
+        <h2>Let's talk about what you're working on</h2>
+        <p>A short conversation is the best way to see if we're a fit.</p>
+        <a href="contact.html" class="button">Get in Touch</a>
+    </div>
+</section>
